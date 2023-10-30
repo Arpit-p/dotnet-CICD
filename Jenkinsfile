@@ -12,7 +12,6 @@ pipeline {
             steps {
                 // Build the .NET project with Docker
                 script {
-                    sh 'cd home/ubuntu/webpage '
                     sh 'docker build -t dotnet_CICD .' // Pull your Docker image
                 }
             }
