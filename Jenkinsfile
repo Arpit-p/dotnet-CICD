@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out the source code from the Git repository
-                giturl : 'https://github.com/Arpit-p/dotnet-CICD.git'
+               git url: 'https://github.com/Arpit-p/dotnet-CICD.git'
             }
         }
 
