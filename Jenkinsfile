@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Build the .NET project with Docker
                 script {
-                    sh 'sudo docker build -t dotnet-cicd .' // Pull your Docker image
+                    sh 'docker build -t dotnet-cicd .' // Pull your Docker image
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 // Deploy the built artifacts to the AWS server
                 script {
-                    sh 'sudo docker run -d -p 8085:80 --name CICD dotnet-cicd' // Transfer artifacts to AWS server using SCP
+                    sh 'docker run -d -p 8085:80 --name CICD dotnet-cicd' // Transfer artifacts to AWS server using SCP
                 }
             }
         }
