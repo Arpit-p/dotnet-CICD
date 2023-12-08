@@ -6,7 +6,7 @@ pipeline {
     }
     stages {
         stage('Checkout') {
-            steps {
+            steps { 
                 script {
                     git credentialsId: 'your-git-credentials-id', url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
                 }
