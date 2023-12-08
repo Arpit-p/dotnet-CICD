@@ -13,31 +13,33 @@ pipeline {
             }
         }
 
-        stage('Build with Docker') {
-            steps {
-                script {
-                    sh 'docker build -t dotnet-cicd .' // Build Docker image
-                }
-            }
-        }
+        // stage('Build with Docker') {
+        //     steps {
+        //         script {
+        //             sh 'docker build -t dotnet-cicd .' // Build Docker image
+        //         }
+        //     }
+        // }
 
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv('SonarQubeServer') {
-                        sh 'dotnet sonarscanner begin'
-                        sh 'dotnet build'
-                        sh 'dotnet sonarscanner end /d:sonar.login'
-                    }
-                }
+       stage('SonarQube Analysis') {
+    steps {
+        script {
+            // Use SonarQube credentials
+            withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')]) {
+                // Execute SonarScanner commands
+                sh "dotnet sonarscanner begin /k:'ec18d7ccc6c967f19c225f8994a13204c6c34e24' /d:sonar.host.url='http://sonarqube-server:9000' /d:sonar.login=\${SONAR_TOKEN}"
+                sh 'dotnet build'
+                sh "dotnet sonarscanner end /d:sonar.login=\${SONAR_TOKEN}"
             }
         }
+    }
+}
 
-        stage('Deploy to AWS') {
-            steps {
-                sh 'docker run -d -p 8087:80 dotnet-cicd'
-            }
-        }
+        // stage('Deploy to AWS') {
+        //     steps {
+        //         sh 'docker run -d -p 8087:80 dotnet-cicd'
+        //     }
+        // }
 
         // Other stages in your pipeline if needed
     }
