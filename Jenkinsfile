@@ -5,7 +5,7 @@ pipeline {
     //     SONARQUBE_SCANNER_HOME = tool 'SonarScanner'
     // }
     stages {
-        // stage('Checkout') {
+// stage('Checkout') {
         //     steps { 
         //         script {
         //             git url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
