@@ -1,17 +1,17 @@
 pipeline {
     agent any
-    environment {
-       // GIT_CREDENTIALS = credentials('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')
-        SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
-    }
+    // environment {
+    //    // GIT_CREDENTIALS = credentials('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')
+    //     SONARQUBE_SCANNER_HOME = tool 'SonarScanner'
+    // }
     stages {
-        stage('Checkout') {
-            steps { 
-                script {
-                    git url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
-                }
-            }
-        }
+        // stage('Checkout') {
+        //     steps { 
+        //         script {
+        //             git url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
+        //         }
+        //     }
+        // }
 
         // stage('Build with Docker') {
         //     steps {
