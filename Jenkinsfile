@@ -2,7 +2,7 @@ pipeline {
     agent any
     // environment {
     //    // GIT_CREDENTIALS = credentials('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')
-        //SONARQUBE_SCANNER_HOME = tool 'sonarscanner'
+          SONARQUBE_SCANNER_HOME = tool 'sonarqube'
     // }
     stages {
 // stage('Checkout') {
