@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps { 
                 script {
-                    git credentialsId: 'your-git-credentials-id', url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
+                    git credentialsId: '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', url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
                 }
             }
         }
