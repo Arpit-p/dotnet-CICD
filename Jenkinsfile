@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        GIT_CREDENTIALS = credentials('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')
+       // GIT_CREDENTIALS = credentials('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')
         SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
     }
     stages {
         stage('Checkout') {
             steps { 
                 script {
-                    git credentialsId: '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', url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
+                    git url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
                 }
             }
         }
