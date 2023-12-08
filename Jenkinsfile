@@ -1,29 +1,44 @@
 pipeline {
     agent any
+    environment {
+        GIT_CREDENTIALS = credentials('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')
+        SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
+    }
     stages {
         stage('Checkout') {
             steps {
-                // Check out the source code from the Git repository
-               git url: 'https://github.com/Arpit-p/dotnet-CICD.git',branch: "main"
+                script {
+                    git credentialsId: 'your-git-credentials-id', url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
+                }
             }
         }
 
         stage('Build with Docker') {
             steps {
-                // Build the .NET project with Docker
                 script {
-                    sh 'docker build -t dotnet-cicd .' // Pull your Docker image
+                    sh 'docker build -t dotnet-cicd .' // Build Docker image
                 }
             }
         }
 
-        stage('run container to AWS') {
+        stage('SonarQube Analysis') {
             steps {
-                // Deploy the built artifacts to the AWS server
                 script {
-                    sh 'docker run -d -p 8085:80 --name CICD dotnet-cicd' // Transfer artifacts to AWS server using SCP
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh 'dotnet sonarscanner begin'
+                        sh 'dotnet build'
+                        sh 'dotnet sonarscanner end /d:sonar.login'
+                    }
                 }
             }
         }
+
+        stage('Deploy to AWS') {
+            steps {
+                sh 'docker run -d -p 8087:80 dotnet-cicd'
+            }
+        }
+
+        // Other stages in your pipeline if needed
     }
 }
