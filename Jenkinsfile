@@ -1,18 +1,19 @@
 pipeline {
     agent any
     // environment {
-    //    // GIT_CREDENTIALS = credentials('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')
+       // GIT_CREDENTIALS = credentials('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')
      //   //  SONARQUBE_SCANNER_HOME = tool 'sonarqube'
     // }
-    stages {
-// stage('Checkout') {
-        //     steps { 
-        //         script {
-        //             git url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
-        //         }
-        //     }
-        // }
-
+   stages {
+        stage('Checkout') {
+            steps { 
+                script {
+                    git credentialsId: 'arpit', url: 'https://github.com/Arpit-p/dotnet-CICD.git', branch: 'main'
+                }
+            }
+        }
+   }
+    // 
         // stage('Build with Docker') {
         //     steps {
         //         script {
@@ -25,7 +26,7 @@ pipeline {
     // steps {
     //     script {
             // Use SonarQube credentials
-            withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')]) {
+            // withCredentials([string(credentialsId: '1', variable: 'SONAR_TOKEN')]) {
                 // Execute SonarScanner commands
 //                 sh "dotnet sonarscanner begin /k:'ec18d7ccc6c967f19c225f8994a13204c6c34e24' /d:sonar.host.url='http://sonarqube-server:9000' /d:sonar.login=\${SONAR_TOKEN}"
 //                 sh 'dotnet build'
@@ -42,5 +43,5 @@ pipeline {
         // }
 
         // Other stages in your pipeline if needed
-    }
+    // }
 }
